@@ -6,7 +6,7 @@ name: Build and deploy ASP.Net Core app to Azure Web App - Dev-HelseId-Demo-Fhi
 on:
   push:
     branches:
-      - main
+      - publish-to-azure
   workflow_dispatch:
 
 jobs:
