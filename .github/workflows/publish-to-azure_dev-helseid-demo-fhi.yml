@@ -6,7 +6,7 @@ name: Build and deploy ASP.Net Core app to Azure Web App - dev-helseid-demo-fhi
 on:
   push:
     branches:
-      - publish-to-azure
+      - main
   workflow_dispatch:
 
 jobs:
