@@ -1,11 +1,9 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: build solution
+name: Fhi.Helseid.Demo.CI
 
-on:
-  pull_request:
-    types: [opened, reopened, edited, synchronize]
+on: [push, pull_request]
 
 jobs:
   build:
