@@ -1,0 +1,9 @@
+<Project>
+    <PropertyGroup>
+      <Nullable>enable</Nullable>
+      <authors>Folkehelseinstituttet (FHI), Norsk Helsenett (NHN)</authors>
+      <Copyright>(c) 2020-2024 Folkehelseinstituttet (FHI), Norsk Helsenett (NHN)</Copyright>
+      <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+  </Project>
+  
