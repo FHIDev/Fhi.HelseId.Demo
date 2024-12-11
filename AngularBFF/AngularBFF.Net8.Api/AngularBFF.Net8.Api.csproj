@@ -7,8 +7,8 @@
     <SpaRoot>..\Angular.Client</SpaRoot>
     <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:4200</SpaProxyServerUrl>
-    <UserSecretsId>b1a93959-6172-416e-bd25-8d43347eb8f3</UserSecretsId>
     <AssemblyName>AngularBFF.Net8</AssemblyName>
+    <UserSecretsId>b1a93959-6172-416e-bd25-8d43347eb8f3</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

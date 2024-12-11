@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+    .AddUserSecrets("b1a93959-6172-416e-bd25-8d43347eb8f3")
     .AddEnvironmentVariables();
 
 builder.Services.AddLogging();
