@@ -3,17 +3,23 @@ using AngularBFF.Net8.Api.Weather;
 using Fhi.HelseId.Web.ExtensionMethods;
 
 var builder = WebApplication.CreateBuilder(args);
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Configuration.AddUserSecrets("b1a93959-6172-416e-bd25-8d43347eb8f3");
+}
+
 builder.Configuration
-    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
-    .AddUserSecrets("b1a93959-6172-416e-bd25-8d43347eb8f3")
-    .AddEnvironmentVariables();
+.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+.AddUserSecrets("b1a93959-6172-416e-bd25-8d43347eb8f3")
+.AddEnvironmentVariables();
 
 builder.Services.AddLogging();
 builder.Services.AddTransient<IWeatherForecastService, WeatherForecastService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddTransient<BearerTokenHandler>();
+builder.Services.AddScoped<BearerTokenHandler>();
 builder.Services.ConfigureHttpClientDefaults(b => b.AddHttpMessageHandler<BearerTokenHandler>());
 
 builder.Services.AddHttpClient("weatherApi",client =>
