@@ -9,26 +9,13 @@ if (builder.Environment.IsDevelopment())
 {
     builder.Configuration.AddUserSecrets("b1a93959-6172-416e-bd25-8d43347eb8f3");
 }
-
 builder.Services.AddLogging();
 builder.Services.AddTransient<IWeatherForecastService, WeatherForecastService>();
 builder.Services.AddHttpContextAccessor();
-<<<<<<< HEAD
-builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddScoped<BearerTokenHandler>();
-builder.Services.ConfigureHttpClientDefaults(b => b.AddHttpMessageHandler<BearerTokenHandler>());
-
-builder.Services.AddHttpClient("weatherApi", client =>
-{
-    client.BaseAddress = new Uri("https://localhost:7278/");
-});
-=======
 builder.Services.AddHelseIdAuthenticationServicesForApis(
 [
     new ApiOutgoingKonfigurasjon() { Name = "WeatherApi", Url = "https://localhost:7278/" }
 ]);
->>>>>>> bb1f5c0 (changes after review)
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
