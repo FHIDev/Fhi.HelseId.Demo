@@ -22,7 +22,7 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<BearerTokenHandler>();
 builder.Services.ConfigureHttpClientDefaults(b => b.AddHttpMessageHandler<BearerTokenHandler>());
 
-builder.Services.AddHttpClient("weatherApi",client =>
+builder.Services.AddHttpClient("weatherApi", client =>
 {
     client.BaseAddress = new Uri("https://localhost:7278/");
 });
