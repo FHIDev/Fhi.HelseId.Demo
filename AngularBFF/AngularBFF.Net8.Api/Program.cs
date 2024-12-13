@@ -1,5 +1,6 @@
-using AngularBFF.Net8.Api.Http;
 using AngularBFF.Net8.Api.Weather;
+using Fhi.HelseId.Api.ExtensionMethods;
+using Fhi.HelseId.Common.Configuration;
 using Fhi.HelseId.Web.ExtensionMethods;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,15 +10,10 @@ if (builder.Environment.IsDevelopment())
     builder.Configuration.AddUserSecrets("b1a93959-6172-416e-bd25-8d43347eb8f3");
 }
 
-builder.Configuration
-.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
-.AddUserSecrets("b1a93959-6172-416e-bd25-8d43347eb8f3")
-.AddEnvironmentVariables();
-
 builder.Services.AddLogging();
 builder.Services.AddTransient<IWeatherForecastService, WeatherForecastService>();
 builder.Services.AddHttpContextAccessor();
+<<<<<<< HEAD
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<BearerTokenHandler>();
 builder.Services.ConfigureHttpClientDefaults(b => b.AddHttpMessageHandler<BearerTokenHandler>());
@@ -26,6 +22,12 @@ builder.Services.AddHttpClient("weatherApi", client =>
 {
     client.BaseAddress = new Uri("https://localhost:7278/");
 });
+=======
+builder.Services.AddHelseIdAuthenticationServicesForApis(
+[
+    new ApiOutgoingKonfigurasjon() { Name = "WeatherApi", Url = "https://localhost:7278/" }
+]);
+>>>>>>> bb1f5c0 (changes after review)
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

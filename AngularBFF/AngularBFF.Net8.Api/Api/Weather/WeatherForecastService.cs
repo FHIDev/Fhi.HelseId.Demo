@@ -24,7 +24,7 @@ namespace AngularBFF.Net8.Api.Weather
 
         public async Task<IEnumerable<WeatherForcastModel>?> GetWeather()
         {
-            var client = Factory.CreateClient("weatherApi");
+            var client = Factory.CreateClient("WeatherApi");
             var response = await client.GetAsync("api/v1/weatherforecast");
             response.EnsureSuccessStatusCode();
 
