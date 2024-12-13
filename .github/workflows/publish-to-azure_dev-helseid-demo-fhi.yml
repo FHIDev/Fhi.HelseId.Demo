@@ -23,10 +23,10 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build AngularBFF/ApiNet8/AngularBFF.Net8.Api.csproj --configuration Release
+        run: dotnet build AngularBFF/AngularBFF.Net8.Api/AngularBFF.Net8.Api.csproj --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish AngularBFF/ApiNet8/AngularBFF.Net8.Api.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish AngularBFF/AngularBFF.Net8.Api/AngularBFF.Net8.Api.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
