@@ -1,6 +1,6 @@
-namespace Net8.Api.Api.Weather.V1.Dto
+namespace Weather.Net8.Api.Api.Weather.V1
 {
-    public class WeatherForecast
+    public class WeatherForecastDto
     {
         public DateOnly Date { get; set; }
 

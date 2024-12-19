@@ -1,24 +1,24 @@
+using AngularBFF.Net8.Api.Weather;
+using Fhi.HelseId.Api.ExtensionMethods;
+using Fhi.HelseId.Common.Configuration;
 using Fhi.HelseId.Web.ExtensionMethods;
-using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Host.UseSerilog((ctx, lc) => lc
-    .ReadFrom.Configuration(ctx.Configuration)
-    .Enrich.FromLogContext()
-    .Enrich.WithCorrelationIdHeader("x-correlation-id")
-);
-builder.Configuration
-    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
-    .AddEnvironmentVariables();
 
-// Add services to the container.
-
+if (builder.Environment.IsDevelopment())
+{
+    builder.Configuration.AddUserSecrets("b1a93959-6172-416e-bd25-8d43347eb8f3");
+}
+builder.Services.AddLogging();
+builder.Services.AddTransient<IWeatherForecastService, WeatherForecastService>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddHelseIdAuthenticationServicesForApis(
+[
+    new ApiOutgoingKonfigurasjon() { Name = "WeatherApi", Url = "https://localhost:7278/" }
+]);
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 
 var authBuilder = builder.AddHelseIdWebAuthentication()
     .UseJwkKeySecretHandler()
@@ -26,7 +26,6 @@ var authBuilder = builder.AddHelseIdWebAuthentication()
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -34,19 +33,15 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseDefaultFiles();
 app.UseStaticFiles();
-
 app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.UseHelseIdProtectedPaths();
 
 app.MapControllers();
-
 app.MapFallbackToFile("/index.html");
 
 app.Run();
