@@ -1,4 +1,5 @@
 using AngularBFF.Net8.Api.Weather;
+using Fhi.HelseId.Refit;
 using Fhi.HelseId.Web.ExtensionMethods;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +9,6 @@ if (builder.Environment.IsDevelopment())
     builder.Configuration.AddUserSecrets("b1a93959-6172-416e-bd25-8d43347eb8f3");
 }
 builder.Services.AddLogging();
-builder.Services.AddTransient<IWeatherForecastService, WeatherForecastService>();
 builder.Services.AddHttpContextAccessor();
 
 
@@ -16,12 +16,23 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-////.AddOutgoingApis() and .WithHttpClients() adds HttpClient configured in Apis. You can also use Refit. Then you do not need these
 var authBuilder = builder.AddHelseIdWebAuthentication()
     .UseJwkKeySecretHandler()
-    .AddOutgoingApis()
-    .WithHttpClients()
     .Build();
+
+////Sample using HttpClient
+//builder.Services.AddTransient<IWeatherForecastService, WeatherForecastService>();
+//authBuilder
+//     .AddOutgoingApis()
+//     .WithHttpClients();
+
+
+//// Sample of using Refit
+builder.Services.AddTransient<IWeatherForecastService, WeatherForecastServiceWithRefit>();
+builder
+    .AddHelseidRefitBuilder()
+    .AddRefitClient<IWeatherForcastApi>(nameof(WeatherForecastServiceWithRefit));
+
 
 var app = builder.Build();
 
