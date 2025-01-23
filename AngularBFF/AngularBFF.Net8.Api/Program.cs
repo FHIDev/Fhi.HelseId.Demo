@@ -20,11 +20,11 @@ var authBuilder = builder.AddHelseIdWebAuthentication()
     .UseJwkKeySecretHandler()
     .Build();
 
-////Sample using HttpClient
-//builder.Services.AddTransient<IWeatherForecastService, WeatherForecastService>();
-//authBuilder
-//     .AddOutgoingApis()
-//     .WithHttpClients();
+// Sample using HttpClient
+////builder.Services.AddTransient<IWeatherForecastService, WeatherForecastService>();
+////authBuilder
+////     .AddOutgoingApis()
+////     .WithHttpClients();
 
 
 //// Sample of using Refit
