@@ -20,19 +20,11 @@ var authBuilder = builder.AddHelseIdWebAuthentication()
     .UseJwkKeySecretHandler()
     .Build();
 
-// Sample using HttpClient
-////builder.Services.AddTransient<IWeatherForecastService, WeatherForecastService>();
-////authBuilder
-////     .AddOutgoingApis()
-////     .WithHttpClients();
+// Sample using HttpClient (Comment in WithHttpClient, comment out WithRefit)
+////builder.WithHttpClient(authBuilder);
 
-
-//// Sample of using Refit
-builder.Services.AddTransient<IWeatherForecastService, WeatherForecastServiceWithRefit>();
-builder
-    .AddHelseidRefitBuilder()
-    .AddRefitClient<IWeatherForcastApi>(nameof(WeatherForecastServiceWithRefit));
-
+// Sample of using Refit (Comment in WithRefit, comment out WithHttpClient)
+builder.WithRefit();
 
 var app = builder.Build();
 
@@ -55,3 +47,41 @@ app.MapControllers();
 app.MapFallbackToFile("/index.html");
 
 app.Run();
+
+
+/// <summary>
+/// The below extension methods illustrating two ways of downstream API call with access token. 
+/// </summary>
+internal static class ApiExtensions
+{
+    /// <summary>
+    /// Using refit to add access token to the API call
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <returns></returns>
+    internal static WebApplicationBuilder WithRefit(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddTransient<IWeatherForecastService, WeatherForecastServiceWithRefit>();
+        builder
+            .AddHelseidRefitBuilder()
+            .AddRefitClient<IWeatherForcastApi>(nameof(WeatherForecastServiceWithRefit));
+
+        return builder;
+    }
+
+    /// <summary>
+    /// Using HttpClient to add access token to the API call
+    /// </summary>
+    /// <param name="builder"></param>
+    /// <param name="authBuilder"></param>
+    /// <returns></returns>
+    internal static WebApplicationBuilder WithHttpClient(this WebApplicationBuilder builder, HelseIdWebAuthBuilder authBuilder)
+    {
+        builder.Services.AddTransient<IWeatherForecastService, WeatherForecastService>();
+        authBuilder
+             .AddOutgoingApis()
+             .WithHttpClients();
+
+        return builder;
+    }
+}

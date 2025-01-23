@@ -55,4 +55,4 @@ namespace AngularBFF.Net8.Api.Weather
         [Get("/api/v1/weatherforecast")]
         Task<ApiResponse<IEnumerable<WeatherForcastModel>>> GetWeatherForcast();
     }
-    }
+}
