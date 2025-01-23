@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using Refit;
+using System.Text.Json;
 
 namespace AngularBFF.Net8.Api.Weather
 {
@@ -31,5 +32,27 @@ namespace AngularBFF.Net8.Api.Weather
             var content = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<IEnumerable<WeatherForcastModel>>(content);
         }
+    }
+
+    public class WeatherForecastServiceWithRefit : IWeatherForecastService
+    {
+        public WeatherForecastServiceWithRefit(IWeatherForcastApi weatherForcastApi)
+        {
+            WeatherForcastApi = weatherForcastApi;
+        }
+
+        public IWeatherForcastApi WeatherForcastApi { get; }
+
+        public async Task<IEnumerable<WeatherForcastModel>?> GetWeather()
+        {
+            var response = await WeatherForcastApi.GetWeatherForcast();
+            return response.Content;
+        }
+    }
+
+    public interface IWeatherForcastApi
+    {
+        [Get("/api/v1/weatherforecast")]
+        Task<ApiResponse<IEnumerable<WeatherForcastModel>>> GetWeatherForcast();
     }
 }

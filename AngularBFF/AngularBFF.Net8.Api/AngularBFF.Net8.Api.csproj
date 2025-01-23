@@ -18,8 +18,10 @@
   <ItemGroup>
     <PackageReference Include="Fhi.AuthControllers" Version="8.0.1" />
     <PackageReference Include="Fhi.HelseId.Api" Version="8.0.1" />
+    <PackageReference Include="Fhi.HelseId.Refit" Version="8.0.1" />
     <PackageReference Include="Fhi.HelseId.Web" Version="8.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="8.0.8" />
+    <PackageReference Include="Refit" Version="8.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
   </ItemGroup>
 

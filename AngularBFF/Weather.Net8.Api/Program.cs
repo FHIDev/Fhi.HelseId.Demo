@@ -12,7 +12,9 @@ var helseIdConfiguration = new HelseIdApiKonfigurasjon()
     Authority = "https://helseid-sts.test.nhn.no/",
     ApiName = "fhi:weather",
     ApiScope = "fhi:weather/access",
-    RequireContextIdentity = true
+    RequireContextIdentity = true, 
+    RequireDPoPTokens = true,
+    AllowDPoPTokens = true
 };
 builder.Services.AddHelseIdApiAuthentication(helseIdConfiguration);
 
