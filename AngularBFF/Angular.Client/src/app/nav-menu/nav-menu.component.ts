@@ -4,10 +4,9 @@ import { AuthenticationService } from '../authentication.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-nav-menu',
-  templateUrl: './nav-menu.component.html',
-  standalone: true,
-  imports: [FhiPopoverMenuComponent]
+    selector: 'app-nav-menu',
+    templateUrl: './nav-menu.component.html',
+    imports: [FhiPopoverMenuComponent]
 })
 
 export class NavMenuComponent {

@@ -7,7 +7,6 @@ import { UserSessionComponent } from './user-session/user-session.component';
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    standalone: true,
     imports: [NavMenuComponent, WeatherForecastComponent, UserSessionComponent]
 })
 export class AppComponent {
