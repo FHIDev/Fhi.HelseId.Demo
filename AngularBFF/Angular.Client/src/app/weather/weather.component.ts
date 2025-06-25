@@ -13,7 +13,6 @@ interface WeatherForecast {
 @Component({
     selector: 'weather-component',
     templateUrl: 'weather.component.html',
-    standalone: true,
     imports: [NgIf, NgFor]
 })
 

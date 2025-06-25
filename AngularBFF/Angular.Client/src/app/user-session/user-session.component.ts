@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService, User } from '../authentication.service';
 import { catchError, map, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { NgIf } from '@angular/common';
-import { jwtDecode, JwtPayload } from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 type UserSessionDto = {
   accessToken: string,
@@ -19,10 +18,9 @@ type TokenInformation = {
 
 
 @Component({
-  selector: 'app-user-session',
-  templateUrl: './user-session.component.html',
-  standalone: true,
-  imports:[NgIf]
+    selector: 'app-user-session',
+    templateUrl: './user-session.component.html',
+    imports: []
 })
 
 
@@ -35,7 +33,7 @@ export class UserSessionComponent implements OnInit  {
     idToken: '',
     accessTokenJwt: '',
     idTokenJwt: ''
-  }; 
+  };
 
   constructor(auth: AuthenticationService, private http: HttpClient) {
     this.session$ = auth.getSession();
